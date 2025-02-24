@@ -1,0 +1,98 @@
+<div>
+    <div class="row text-center bg-danger">
+        <h1 class="p-3">Data Binding</h1>
+    </div>
+    <div class="row">
+        <div class="col-6 text-center bg-info">
+            <h2 class="p-3">One Way</h2>
+        </div>
+        <div class="col-6 text-center bg-success">
+            <h2 class="p-3">Two Way</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 text-center bg-secondary">
+            <h3 class="p-3">From .ts to .html</h3>
+        </div>
+        <div class="col-3 text-center bg-warning">
+            <h3 class="p-3">From .html to .ts</h3>
+        </div>
+        <div class="col-6 text-center bg-danger">
+            <h3 class="p-3">Using ngModel</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="row">
+                <div class="col-6 text-center bg-info">
+                    <h4 class="p-3">Inerpolation</h4>
+                </div>
+                <div class="col-6 text-center bg-success">
+                    <h4 class="p-3">Property Binding</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 text-center bg-primary">
+            <h4 class="p-3">Event Binding</h4>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <!-- Interpolation is used by using-{{}} -->
+    <div class="col-4">
+        <h4 class="text-decoration-underline text-uppercase">interpolation </h4>
+        <h5>Name - {{Name}}</h5>
+        <p>Interpolation is used by using-double curly braces like this:{{Interpolation}}. Above is and example of
+            interpolation</p>
+    </div>
+    <!-- Data binding to any html parameter using [parameter] = "component variable". like below on value parameter of input. -->
+    <div class="col-4">
+        <h4 class="text-decoration-underline text-uppercase">proprty binding</h4>
+        <input type="text" [value]="Name" placeholder="Name" />
+        <div>
+            <input [type]="inputType" />
+        </div>
+    </div>
+    <!-- this is and example of event Binding -->
+    <div class="col-4">
+        <div>
+            <h4 class="text-decoration-underline text-uppercase">event binding</h4>
+            <div>
+                <button (click)="showMessage()" class="btn btn-primary">show</button>
+            </div>
+            <div>
+                <select (change)="onChange($event)" name="" id="">
+                    <option value="">select state</option>
+                    <option value="uttar pradesh">uttar pradesh</option>
+                    <option value="rajasthan">rajasthan</option>
+                    <option value="bihar">bihar</option>
+                    <option value="delhi">delhi</option>
+                </select>
+            </div>
+            <div class="pt-2 pb-2 gap-2">
+                <button class="btn btn-warning" (click)="onSelectbtn('Angular')">
+                    Angular
+                </button>
+                <button class="btn btn-success" (click)="onSelectbtn('React')">
+                    React
+                </button>
+                <button class="btn btn-dark" (click)="onSelectbtn('Vue')">
+                    Vue
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row col-4 pt-3">
+    <h4 class="text-decoration-underline text-uppercase">ngModel</h4>
+        <div class="col-6">
+        <label>Input Change Name variable using ngModel</label>
+        <input [(ngModel)]="Name" type="text" class="border-danger">
+    </div>
+    <div class="col-6">
+        <label>this input showing changes in variable</label>
+        <input type="text" [value]="Name" disabled>
+    </div>
+</div>

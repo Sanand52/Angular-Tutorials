@@ -1,0 +1,187 @@
+<div class="row">
+  <div class="col-3">
+    @if(isDiv1Visible == true){
+    <div class="bg-success p-3 text-center">
+      <h4>Div 1</h4>
+    </div>
+    }
+  </div>
+  <div class="col-3">
+    @if(isDiv2Visible == ""){
+    <h4 class="bg-info p-3 text-center">Input Your Name To Show</h4>
+    }@else{
+    <div class="bg-secondary p-3 text-center">
+      <h4>{{ isDiv2Visible }}</h4>
+    </div>
+    }
+  </div>
+  <div class="col-3">
+    @if(isDay=="mon"){
+    <div class="bg-primary p-3 text-center">
+      <h4>Monday</h4>
+    </div>
+    }@else if (isDay=='tue') {
+    <div class="bg-primary p-3 text-center">
+      <h4>Tuesday</h4>
+    </div>
+    }@else if (isDay=='wed') {
+    <div class="bg-primary p-3 text-center">
+      <h4>Wednesday</h4>
+    </div>
+    }@else if (isDay=='thu') {
+    <div class="bg-primary p-3 text-center">
+      <h4>Thurshday</h4>
+    </div>
+    }@else if (isDay=='fri') {
+    <div class="bg-primary p-3 text-center">
+      <h4>Friday</h4>
+    </div>
+    }@else if (isDay=='sat') {
+    <div class="bg-primary p-3 text-center">
+      <h4>Saturday</h4>
+    </div>
+    }@else if (isDay=='sun') {
+    <div class="bg-primary p-3 text-center">
+      <h4>Sunday</h4>
+    </div>
+    }@else if (isDay==""||isDay==null||isDay.length<=2) {
+    <div class="bg-warning p-3 text-center">
+      <h4>Enter first 3 letters of day</h4>
+    </div>
+    }@else if (isDay.length>=2) {
+    <div class="bg-danger p-3 text-center">
+      <h4>Enter Correct day</h4>
+    </div>
+    }
+  </div>
+  <div class="col-3">
+    <div class="bg-secondary p-3 text-center">
+      <h4>{{ city }}</h4>
+    </div>
+  </div>
+</div>
+<div class="row pt-3">
+  <div class="col-3 text-center">
+    <button class="btn btn-success mx-1" (click)="showDiv1(true)">Show</button>
+    <button class="btn btn-danger mx-1" (click)="showDiv1(false)">Hide</button>
+  </div>
+  <div class="col-3 text-center">
+    <input type="text" class="border-info" [(ngModel)]="isDiv2Visible" />
+  </div>
+  <div class="col-3 text-center">
+    <input type="text" class="border-info" [(ngModel)]="isDay" maxlength="3" />
+  </div>
+
+  <!-- student table view -->
+  <div class="col-3 text-center">
+    <select
+      name=""
+      id=""
+      [(ngModel)]="city"
+      (change)="citySelect(city)"
+      (click)="precity(city)"
+    >
+      <option value="Select city">select City</option>
+      @for (item of cityList; track $index) {
+      <option [value]="item">{{ item }}</option>
+      }
+    </select>
+  </div>
+</div>
+<div class="row pt-3">
+  <div class="col-6">
+    <h2>Student List</h2>
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>S. No.</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of studentList; track $index) {
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.age }}</td>
+          <td>{{ item.gender }}</td>
+          <td style="background-color:{{item.status?'green':'red'}};">
+            @if(item.status){ Active }
+            @else{ Inactive }
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Edit student data -->
+  <div class="col-3">
+    <h2>Edit Student</h2>
+    <div class="row text-center col-10">
+        <select name="" id="" [(ngModel)]="id" (change)="getStd(id)">
+            <option value="">select student</option>
+            @for (item of studentList; track $index) {
+                <option [value]="item.id">{{item.name}}</option>
+            }
+            
+        </select>
+    </div>
+    <div class="row col-10 text-center px-3">
+        @if(student){
+            <label for="name">Name:</label>
+            <input type="text" id="name" [value]="student.name" [(ngModel)]="student.name">
+          
+            <label for="age">Age:</label>
+            <input type="text" id="age" [value]="student.age" [(ngModel)]="student.age">
+          
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" [value]="student.gender" [(ngModel)]="student.gender">
+          
+            <label for="status">Status:</label>
+            <input type="checkbox" id="status" [value]="student.status ? 'Active' : 'Inactive'" [(ngModel)]="student.status">
+              <!-- delete button -->
+                <button class="btn btn-danger mt-1" (click)="deleteStudent(student.id)">Delete</button>
+                <button class="btn btn-success mt-2" (click)="updateStudent()">Update Student</button>
+            
+        }@else {
+            <h5>no student is selcted</h5>
+        }
+        
+    </div>
+  </div>
+
+  <!-- add student view -->
+  <div class="col-3">
+    <h2>Add New Student</h2>
+<form (ngSubmit)="addStudent()">
+  <label for="newId" class="py-2">ID:</label>
+  <input type="text" id="newId" [(ngModel)]="newStudent.id" name="id" required>
+<br>
+  <label for="newName" class="py-2">Name:</label>
+  <input type="text" id="newName" [(ngModel)]="newStudent.name" name="name" required>
+<br>
+  <label for="newAge" class="py-2">Age:</label>
+  <input type="number" id="newAge" [(ngModel)]="newStudent.age" name="age" required>
+<br>
+  <label for="newGender" class="py-2">Gender:</label>
+  <select id="newGender" [(ngModel)]="newStudent.gender" name="gender" required>
+    <option value="">-- Select Gender --</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+<br>
+  <label for="newStatus" class="py-2">Status:</label>
+  <select id="newStatus" [(ngModel)]="newStudent.status" name="status" required>
+    <option value="true">Active</option>
+    <option value="false">Inactive</option>
+  </select>
+<br>
+  <button type="submit" class="btn btn-primary py-2">Add Student</button>
+</form>
+  </div>
+</div>
+

@@ -1,0 +1,104 @@
+<div class="row">
+  <h1 class="text-decoration-underline">Pipes</h1>
+  <h2 class="fw-bold mb-4">
+    Pipes is only use for fomatting the data. Can create custom Pipes.<br />
+    Below are some exampleas of Pipes:-
+  </h2>
+  <br />
+  <div class="col-4">
+    <h3>Print Name normaly</h3>
+    <h4>Name => {{ name }}</h4>
+    <br />
+    <!-- using upper case pipe -->
+    <h3 class="">Using Uppercase Pipe</h3>
+    <h4>Name => {{ name | uppercase }}</h4>
+    <br />
+    <!-- using Lower case pipe -->
+    <h3 class="">Using Lowercase Pipe</h3>
+    <h4>Name => {{ name | lowercase }}</h4>
+  </div>
+  <div class="col-4">
+    <h3>{{ testString }}</h3>
+    <h4>Total character = {{ testString.length }}</h4>
+    <br />
+    <!-- now lets print only 190 characteer using Slice -->
+    <h3>Print 10 chars using slice pipe</h3>
+    <h4>{{ testString | slice : 0 : 10 }}</h4>
+    <br />
+    <!-- now print 20 chars using slice pipe -->
+    <h3>Print 20 chars using slice pipe</h3>
+    <h4>{{ testString | slice : 0 : 20 }}</h4>
+  </div>
+  <div class="col-4">
+    <!-- print object student -->
+    <h3>Print object normaly</h3>
+    <h4>{{ student }}</h4>
+    <br />
+    <!-- now print object using json pipe -->
+    <h3>Json pipe stringify the object</h3>
+    <h4>{{ student | json }}</h4>
+  </div>
+</div>
+<div>
+  ===========================================================================================================
+</div>
+<div class="row">
+  <h1 class="text-decoration-underline">Input Output</h1>
+  <div class="col-6 mt-2">
+    <h3>Input and Output in Angular</h3>
+
+    <h4>Input:</h4>
+    <h5>
+      Used to pass data <strong>from a parent component to a child component</strong>.
+      The child component receives data from the parent via <code>Input</code>.
+    </h5>
+
+    <h4>Output:</h4>
+    <h5>
+      Used to emit events <strong>from a child component to a parent component</strong>.
+      The child component uses <code>Output</code> with <code>EventEmitter</code> to
+      notify the parent about changes or actions.
+    </h5>
+  </div>
+  <div class="col-6 mt-2">
+    <h3>Why This Design?</h3>
+
+    <h4>Unidirectional Data Flow:</h4>
+    <ul>
+      <li>
+        Angular enforces a <strong>unidirectional data flow</strong>:
+        <ul>
+          <li><strong>Parent to Child</strong> via <code>Input</code>.</li>
+          <li><strong>Child to Parent</strong> via <code>Output</code>.</li>
+        </ul>
+      </li>
+      <li>
+        This makes the data flow <strong>predictable</strong> and easier to debug.
+      </li>
+    </ul>
+
+    <h4>Separation of Concerns:</h4>
+    <ul>
+      <li>
+        The <strong>parent component</strong> manages the state and passes data to the child.
+      </li>
+      <li>
+        The <strong>child component</strong> notifies the parent about user interactions or changes.
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-5">
+    <app-create-btn
+      [btnName]="'Reusable button'"
+      (btnClick)="onBtnClick($event)"
+    ></app-create-btn>
+  </div>
+  <div class="col-6">
+    <app-alert
+      [alertType]="'success'"
+      alertMessage="'This alert is from Alert reusable Component'"
+    ></app-alert>
+  </div>
+</div>
